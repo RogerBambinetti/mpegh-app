@@ -7,8 +7,8 @@ const app = fastify();
 
 app.register(multipart, {
     limits: {
-        fileSize: Number.MAX_SAFE_INTEGER,  // For multipart forms, the max file size in bytes
-        files: 1,           // Max number of file fields
+        fileSize: Number.MAX_SAFE_INTEGER,
+        files: 1
     }
 });
 app.register(Routes);
