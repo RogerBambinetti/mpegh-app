@@ -42,7 +42,9 @@ export async function FileDownload(request: FastifyRequest, reply: FastifyReply)
         reply.header('Content-Disposition', `attachment; filename=${fileName}`);
         reply.type('application/octet-stream');
 
-        return reply.send(stream);
+        await reply.send(stream);
+
+        fs.unlinkSync(filePath);
     } catch (err: any) {
         return reply.status(500).send({ message: "Internal Server Error" });
     }
