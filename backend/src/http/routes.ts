@@ -1,9 +1,11 @@
 import { FastifyInstance } from "fastify";
-import { FileUpload } from "./controllers/file-upload";
+
+import { FileConvert, FileDownload } from "./controllers/file-controller";
 
 export default function Routes(app: FastifyInstance) {
 
-    app.post("/files/upload", FileUpload);
+    app.post("/files/convert", FileConvert);
+    app.get("/files/download/:fileName", FileDownload);
 
     return app;
 }
