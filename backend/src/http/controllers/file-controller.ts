@@ -45,6 +45,8 @@ export async function FileDownload(request: FastifyRequest, reply: FastifyReply)
         await reply.send(stream);
 
         fs.unlinkSync(filePath);
+
+        return reply.status(200);
     } catch (err: any) {
         return reply.status(500).send({ message: "Internal Server Error" });
     }
