@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { FastifyReply, FastifyRequest } from "fastify";
 
+import { bulkDecode } from 'mpegh-decoder';
+
 export async function FileConvert(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     try {
         const parts = request.files();
@@ -11,13 +13,22 @@ export async function FileConvert(request: FastifyRequest, reply: FastifyReply):
             return reply.status(400).send({ message: "No files uploaded" });
         }
 
+        const inputs = [];
+
         for await (const part of parts) {
             const uploadPath = path.join(__dirname, '../../uploads', part.filename);
 
             await pipeline(part.file, fs.createWriteStream(uploadPath));
+
+            inputs.push({ input: uploadPath });
         }
 
-        return reply.status(200).send({ message: "File uploaded successfully" });
+        const decodeResult = await bulkDecode(inputs);
+        inputs.forEach(({ input }) => fs.unlinkSync(input));
+
+        const outputFilePaths = decodeResult.map((result) => result.outputFilePath);
+
+        return reply.status(200).send({ message: "Files converted successfully" });
     } catch (err: any) {
         return reply.status(400).send({ message: err.message });
     }

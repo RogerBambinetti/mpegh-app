@@ -10,7 +10,7 @@ const fiftyMBInBytes = 100 * 1024 * 1024;
 app.register(multipart, {
     limits: {
         fileSize: fiftyMBInBytes,
-        files: 1
+        files: 10
     }
 });
 app.register(Routes);
