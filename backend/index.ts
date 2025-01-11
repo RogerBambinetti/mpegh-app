@@ -5,9 +5,11 @@ import Routes from "./src/http/routes";
 
 const app = fastify();
 
+const fiftyMBInBytes = 100 * 1024 * 1024;
+
 app.register(multipart, {
     limits: {
-        fileSize: Number.MAX_SAFE_INTEGER,
+        fileSize: fiftyMBInBytes,
         files: 1
     }
 });
