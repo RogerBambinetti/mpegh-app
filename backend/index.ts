@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import cors from "@fastify/cors";
 import multipart from '@fastify/multipart'
 
 import Routes from "./src/http/routes";
@@ -7,6 +8,7 @@ const app = fastify();
 
 const fiftyMBInBytes = 100 * 1024 * 1024;
 
+app.register(cors, { origin: "*" });
 app.register(multipart, {
     limits: {
         fileSize: fiftyMBInBytes,
@@ -15,8 +17,8 @@ app.register(multipart, {
 });
 app.register(Routes);
 
-const serverPort = Number(process.env.PORT) || 3000;
+const serverPort = Number(process.env.PORT);
 
 app.listen({ port: serverPort }).then(() => {
-    console.log("Server is running on port 3000");
+    console.log("Server is running on port", serverPort);
 });

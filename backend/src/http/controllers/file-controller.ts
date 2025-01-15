@@ -28,7 +28,7 @@ export async function FileConvert(request: FastifyRequest, reply: FastifyReply):
 
         const outputFilePaths = decodeResult.map((result) => result.outputFilePath);
 
-        return reply.status(200).send({ message: "Files converted successfully" });
+        return reply.status(200).send({ message: "Files converted successfully", fileName: path.basename(outputFilePaths[0]) });
     } catch (err: any) {
         return reply.status(400).send({ message: err.message });
     }
