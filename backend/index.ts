@@ -1,3 +1,4 @@
+import "dotenv/config";
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import multipart from '@fastify/multipart'
@@ -17,7 +18,7 @@ app.register(multipart, {
 });
 app.register(Routes);
 
-const serverPort = Number(process.env.PORT);
+const serverPort = Number(process.env.HTTP_PORT);
 
 app.listen({ port: serverPort }).then(() => {
     console.log("Server is running on port", serverPort);
