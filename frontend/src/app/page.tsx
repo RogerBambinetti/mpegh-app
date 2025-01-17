@@ -11,16 +11,18 @@ export default function Home() {
 
   const [isConvertingFiles, setIsConvertingFiles] = useState(false);
 
+  const baseUrl = "http://localhost:3030/files";
+
   const handleChange = async (file: File) => {
     try {
       const form = new FormData();
       form.append('file', file);
 
       setIsConvertingFiles(true);
-      const { data } = await axios.post("http://localhost:3030/files/convert", form);
+      const { data } = await axios.post(`${baseUrl}/convert`, form);
       setIsConvertingFiles(false);
 
-      window.location.href = `http://localhost:3030/files/download/${data.fileName}`;
+      window.location.href = `${baseUrl}/download/${data.fileName}`;
     } catch (error) {
       console.error("Error converting file:", error);
       setIsConvertingFiles(false);
