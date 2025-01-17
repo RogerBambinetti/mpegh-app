@@ -13,10 +13,13 @@ export default function Home() {
 
   const baseUrl = "http://localhost:3030/files";
 
-  const handleChange = async (file: File) => {
+  const handleChange = async (files: FileList) => {
     try {
       const form = new FormData();
-      form.append('file', file);
+
+      for (let i = 0; i < files.length; i++) {
+        form.append('file', files[i]);
+      }
 
       setIsConvertingFiles(true);
       const { data } = await axios.post(`${baseUrl}/convert`, form);
@@ -41,7 +44,7 @@ export default function Home() {
             ariaLabel="loading"
           />
           :
-          <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+          <FileUploader multiple={true} handleChange={handleChange} name="file" types={fileTypes} />
         }
 
       </main>
