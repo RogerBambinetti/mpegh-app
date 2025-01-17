@@ -22,3 +22,7 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+
+#Ignore uploaded files
+
+uploads/
