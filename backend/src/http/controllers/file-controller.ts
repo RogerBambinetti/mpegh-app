@@ -5,6 +5,10 @@ import { FastifyReply, FastifyRequest } from "fastify";
 
 import { bulkDecode } from 'mpegh-decoder';
 
+interface FileConvertQuery {
+    cicp: string;
+}
+
 export async function FileConvert(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
     try {
         const parts = request.files();
@@ -23,7 +27,9 @@ export async function FileConvert(request: FastifyRequest, reply: FastifyReply):
             inputs.push({ input: uploadPath });
         }
 
-        const decodeResult = await bulkDecode(inputs);
+        const options = request.query as FileConvertQuery;
+
+        const decodeResult = await bulkDecode(inputs, options);
         inputs.forEach(({ input }) => fs.unlinkSync(input));
 
         const outputFilePaths = decodeResult.map((result) => result.outputFilePath);

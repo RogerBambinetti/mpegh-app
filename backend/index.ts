@@ -13,7 +13,8 @@ app.register(cors, { origin: "*" });
 app.register(multipart, {
     limits: {
         fileSize: fiftyMBInBytes,
-        files: 10
+        files: 10,
+        fieldSize: fiftyMBInBytes
     }
 });
 app.register(Routes);
