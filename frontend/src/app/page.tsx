@@ -25,7 +25,9 @@ export default function Home() {
       const { data } = await axios.post(`${baseUrl}/convert`, form);
       setIsConvertingFiles(false);
 
-      window.location.href = `${baseUrl}/download/${data.fileName}`;
+      data.fileNames.forEach((fileName: string) => {
+        window.open(`${baseUrl}/download/${fileName}`);
+      });
     } catch (error) {
       console.error("Error converting file:", error);
       setIsConvertingFiles(false);
