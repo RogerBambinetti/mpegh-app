@@ -16,8 +16,8 @@ const fileTypes = ["M4A"];
 
 const options = [
   { value: '6', label: 'CICP INDEX 6' },
-  { value: '16', label: 'CICP INDEX 16' },
-  { value: '21', label: 'CICP INDEX 21' },
+  { value: '12', label: 'CICP INDEX 12' },
+  { value: '20', label: 'CICP INDEX 20' },
 ];
 
 export default function Home() {
