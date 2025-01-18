@@ -56,6 +56,7 @@ export default function Home() {
           defaultValue={selectedOption}
           onChange={(newValue) => setSelectedOption(newValue as SelectOption)}
           options={options}
+          className="w-80"
         />
 
         {isConvertingFiles ?
