@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
+import FileUpload from "./components/FileUpload";
 
 import Select from 'react-select';
 import { TailSpin } from 'react-loader-spinner';
@@ -11,8 +11,6 @@ interface SelectOption {
   value: string;
   label: string;
 }
-
-const fileTypes = ["M4A"];
 
 const options = [
   { value: '6', label: 'CICP INDEX 6' },
@@ -67,7 +65,7 @@ export default function Home() {
             ariaLabel="loading"
           />
           :
-          <FileUploader multiple={true} handleChange={handleChange} name="file" types={fileTypes} />
+          <FileUpload />
         }
 
       </main>
