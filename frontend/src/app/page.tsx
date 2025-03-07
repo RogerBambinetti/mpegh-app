@@ -26,6 +26,11 @@ export default function Home() {
   const baseUrl = "http://localhost:3030/files";
 
   const handleChange = async (files: FileList) => {
+
+    if (!files) {
+      return;
+    }
+
     try {
       const form = new FormData();
 
@@ -65,7 +70,7 @@ export default function Home() {
             ariaLabel="loading"
           />
           :
-          <FileUpload />
+          <FileUpload onChange={handleChange} />
         }
 
       </main>
