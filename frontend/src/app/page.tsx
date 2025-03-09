@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from "react";
 import FileUpload from "./components/FileUpload";
@@ -25,7 +25,7 @@ export default function Home() {
 
   const baseUrl = "http://localhost:3030/files";
 
-  const handleChange = async (files: FileList) => {
+  const handleChange = async (files: FileList | null) => {
 
     if (!files) {
       return;

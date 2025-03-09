@@ -3,13 +3,15 @@
 import React, { useState, useEffect } from "react";
 
 interface FileUploadProps {
-    onChange: (files: FileList) => void;
+    onChange: (files: FileList | null) => void;
 }
 
 export default function FileUpload({ onChange }: FileUploadProps) {
 
     const [files, setFiles] = useState<FileList | null>(null);
-    useEffect(onChange.bind(null, files), [files]);
+    useEffect(() => {
+        onChange(files);
+    }, [files]);
 
     function handleDrop(event: React.DragEvent<HTMLDivElement>) {
         event.preventDefault();
