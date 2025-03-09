@@ -25,7 +25,7 @@ export default function Home() {
 
   const baseUrl = "http://localhost:3030/files";
 
-  const handleChange = async (files: FileList | null) => {
+  const handleChange = async (files: FileList) => {
 
     if (!files) {
       return;
@@ -70,7 +70,7 @@ export default function Home() {
             ariaLabel="loading"
           />
           :
-          <FileUpload onChange={handleChange} />
+          <FileUpload onChange={handleChange} validFormats={['.m4a']} />
         }
 
       </main>

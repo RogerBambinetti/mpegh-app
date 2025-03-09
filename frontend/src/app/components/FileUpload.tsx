@@ -1,16 +1,22 @@
 'use-client';
 
 import React, { useState, useEffect } from "react";
+import path from 'path';
 
 interface FileUploadProps {
-    onChange: (files: FileList | null) => void;
+    onChange: (files: FileList) => void;
+    validFormats: string[];
 }
 
-export default function FileUpload({ onChange }: FileUploadProps) {
+export default function FileUpload({ onChange, validFormats }: FileUploadProps) {
 
     const [files, setFiles] = useState<FileList | null>(null);
     useEffect(() => {
-        onChange(files);
+
+        if (files) {
+            onChange(files);
+        }
+
     }, [files]);
 
     function handleDrop(event: React.DragEvent<HTMLDivElement>) {
@@ -18,7 +24,13 @@ export default function FileUpload({ onChange }: FileUploadProps) {
         const droppedFiles = event.dataTransfer.files;
 
         if (droppedFiles.length) {
-            setFiles(droppedFiles);
+
+            const file = droppedFiles[0];
+            const formatIsValid = validFormats.includes(path.extname(file.name));
+
+            if (formatIsValid) {
+                setFiles(droppedFiles);
+            }
         }
 
     }
